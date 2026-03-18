@@ -15,191 +15,182 @@
 
     body {
         font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-        /* Gradiente inspirado no fundo da imagem */
         background: radial-gradient(circle at center, #ffcc00 0%, #ff4d00 50%, #800000 100%);
         background-attachment: fixed;
         min-height: 100vh;
         display: flex;
+        justify-content: center; /* Centraliza o conteúdo horizontalmente */
         align-items: center;
-        justify-content: center;
-        padding: 1.5rem;
+        padding: 2rem 1.5rem;
+        position: relative;
     }
 
-    .linktree-card {
-        max-width: 620px;
+    /* Textura Halftone */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: radial-gradient(rgba(0,0,0,0.15) 1px, transparent 1px);
+        background-size: 4px 4px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Wrapper principal para permitir o posicionamento da sidebar */
+    .main-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
         width: 100%;
-        /* Vidro escuro para contrastar com o fundo vibrante */
+        max-width: 1400px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* SEÇÃO DE SETS (ESQUERDA) - Flutuante no Desktop */
+    .sets-section {
+        position: absolute;
+        left: 0;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Estilização do Título dos Sets para Legibilidade */
+    .sets-title {
+        color: #ffcc00;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 800;
+        text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        /* Fundo escuro transparente, padding e bordas arredondadas */
+        background: rgba(0, 0, 0, 0.6); 
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 85, 0, 0.2); /* Borda sutil alaranjada */
+    }
+
+    .soundcloud-wrapper {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+        padding: 8px;
+        border: 1px solid rgba(255, 85, 0, 0.3);
+        transition: 0.3s;
+    }
+
+    .soundcloud-wrapper:hover {
+        border-color: #ffcc00;
+        transform: scale(1.03);
+    }
+
+    /* CARD PRINCIPAL - CENTRALIZADO */
+    .linktree-card {
+        width: 100%;
+        max-width: 580px;
         background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
-        border-radius: 3.5rem 3.5rem 2.5rem 2.5rem;
+        border-radius: 3.5rem;
         box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
-        padding: 2.5rem 2rem 2.8rem;
-        transition: all 0.3s ease;
+        padding: 2.5rem 2rem;
         border: 1px solid rgba(255, 204, 0, 0.2);
     }
 
-    .profile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-
-    /* Estilo de borda compartilhada para elementos circulares */
+    /* Estilos de Elementos (Avatar, Links, Residents) */
+    .profile { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; }
+    
     .avatar, .resident-img {
         border-radius: 50%;
-        /* Borda alaranjada espessa com textura sutil */
         border: 4px solid #ff5500; 
-        box-shadow: 0 0 15px rgba(255, 85, 0, 0.6), inset 0 0 10px rgba(0,0,0,0.5);
+        box-shadow: 0 0 15px rgba(255, 85, 0, 0.6);
         overflow: hidden;
-        transition: all 0.3s ease;
     }
 
-    .avatar {
-        width: 130px;
-        height: 130px;
-        margin-bottom: 1.2rem;
-        background: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    .avatar { width: 130px; height: 130px; background: #000; display: flex; align-items: center; justify-content: center; }
+    .avatar-img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Brilho extra no avatar principal */
-    .avatar:hover {
-        border-color: #ffcc00;
-        box-shadow: 0 0 25px rgba(255, 204, 0, 0.8);
-    }
-
-    .avatar-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .links {
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem;
-        margin: 2.2rem 0;
-    }
+    .links { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
 
     .link-item {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
+        display: flex; align-items: center; gap: 1.2rem;
         background: rgba(255, 255, 255, 0.05);
-        padding: 1.1rem 1.8rem;
+        padding: 1rem 1.8rem;
         border-radius: 180px;
         text-decoration: none;
         color: #ffffff;
         font-weight: 600;
-        font-size: 1rem;
-        border: 1px solid rgba(255, 204, 0, 0.3);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(255, 204, 0, 0.2);
+        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         text-transform: uppercase;
     }
 
-    .link-item i {
-        font-size: 1.3rem;
-        width: 2rem;
-        text-align: center;
-        /* Ícones na cor amarela vibrante da logo */
-        color: #ffcc00;
-    }
+    .link-item i { color: #ffcc00; width: 20px; text-align: center; }
+    .link-item span { flex: 1; letter-spacing: 1px; }
 
-    .link-item span {
-        flex: 1;
-        letter-spacing: 1px;
-    }
-
-    .link-item .arrow {
-        font-size: 0.9rem;
-        color: #ffcc00;
-        opacity: 0.5;
-    }
-
-    /* Hover com as cores da logo */
     .link-item:hover {
         background: #ffcc00;
         color: #000;
         transform: scale(1.02);
-        box-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
     }
+    .link-item:hover i { color: #000; }
 
-    .link-item:hover i, 
-    .link-item:hover .arrow {
-        color: #000;
-        opacity: 1;
-    }
-
-    .residents-section {
-        display: flex; 
-        justify-content: center; 
-        gap: 1.5rem; 
-        margin-top: 2rem; 
-        flex-wrap: wrap;
-    }
-
-    .resident-card {
-        text-decoration: none; 
-        text-align: center;
-        transition: 0.3s;
-    }
-
-    .resident-img {
-        width: 75px; 
-        height: 75px; 
-        object-fit: cover;
-        /* Borda alaranjada texturizada aplicada */
-        border-color: #ff5500; 
-    }
-
-    .resident-card:hover .resident-img {
-        border-color: #ffcc00;
-        transform: translateY(-5px);
-        box-shadow: 0 5px 20px rgba(255, 204, 0, 0.6);
-    }
-
-    .resident-name {
-        display: block; 
-        color: #fff; 
-        font-size: 0.7rem; 
-        margin-top: 0.5rem;
-        font-weight: 600;
-        opacity: 0.8;
-    }
+    .residents-section { display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .resident-card { text-decoration: none; text-align: center; transition: 0.3s; }
+    .resident-img { width: 70px; height: 70px; object-fit: cover; border-width: 3px; }
+    .resident-name { display: block; color: #fff; font-size: 0.65rem; margin-top: 0.5rem; font-weight: 600; opacity: 0.7; }
 
     .footer-note {
-        text-align: center;
-        margin-top: 2.5rem;
-        font-size: 0.75rem;
-        color: #ffcc00;
-        border-top: 1px solid rgba(255, 204, 0, 0.2);
-        padding-top: 1.5rem;
-        letter-spacing: 3px;
-        font-weight: bold;
+        text-align: center; margin-top: 2rem; font-size: 0.7rem;
+        color: #ffcc00; border-top: 1px solid rgba(255, 204, 0, 0.1);
+        padding-top: 1.5rem; letter-spacing: 2px;
     }
 
-    @media (max-width: 480px) {
-        .linktree-card {
-            padding: 2rem 1.2rem;
-            border-radius: 2.5rem;
+    /* RESPONSIVIDADE */
+    @media (max-width: 1200px) {
+        .sets-section {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+            margin-bottom: 2rem;
+        }
+        .main-wrapper {
+            flex-direction: column;
+            align-items: center;
         }
     }
-</style>
+    </style>
 </head>
 <body>
-    <div class="linktree-card">
 
-        <div class="profile">
-            <div class="avatar">
-                <img src="https://i.imgur.com/ROlVEEX.jpeg" alt="WAV.CLUB logo" class="avatar-img">
+    <div class="main-wrapper">
+        
+        <aside class="sets-section">
+            <h2 class="sets-title" style="text-align: center">Sets WAV DJs</h2>
+            <div class="soundcloud-wrapper">
+                <iframe width="100%" height="150" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2266579604&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/marvinwav" title="Marvin" target="_blank" style="color: #cccccc; text-decoration: none;">Marvin</a> · <a href="https://soundcloud.com/marvinwav/club-de-carnaval" title="CLUB DE 𝒞𝒜ℛ𝒩AVAL" target="_blank" style="color: #cccccc; text-decoration: none;">CLUB DE 𝒞𝒜ℛ𝒩AVAL</a></div>
+
             </div>
+            <div class="soundcloud-wrapper">
+                <iframe width="100%" height="150" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2283115211&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/iavicious" title="IAVICIOUS" target="_blank" style="color: #cccccc; text-decoration: none;">IAVICIOUS</a> · <a href="https://soundcloud.com/iavicious/wav-carna" title="wav de carna ❤︎ ꪆ 070226" target="_blank" style="color: #cccccc; text-decoration: none;">wav de carna ❤︎ ꪆ 070226</a></div>
+            </div>
+        <div class="soundcloud-wrapper">
+        <iframe width="100%" height="150" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1967021075&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/broncafi" title="zaia" target="_blank" style="color: #cccccc; text-decoration: none;">zaia</a> · <a href="https://soundcloud.com/broncafi/mix-zero-mente-apenas-som" title="mix zero mente apenas som" target="_blank" style="color: #cccccc; text-decoration: none;">mix zero mente apenas som</a></div>
         </div>
+        <div class="soundcloud-wrapper">
+<iframe width="100%" height="150" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2175043173&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/thekalygula" title="Kalygula" target="_blank" style="color: #cccccc; text-decoration: none;">Kalygula</a> · <a href="https://soundcloud.com/thekalygula/bruxaria-na-wav-club" title="bruxaria na wav club" target="_blank" style="color: #cccccc; text-decoration: none;">bruxaria na wav club</a></div>
+        </div>
+        </aside>
 
-        <div class="links">
+        <main class="linktree-card">
+            <div class="profile">
+                <div class="avatar">
+                    <img src="https://i.imgur.com/ROlVEEX.jpeg" alt="WAV.CLUB logo" class="avatar-img">
+                </div>
+            </div>
+
+            <div class="links">
             <a href="https://shotgun.live/events/wav-club-5" class="link-item" target="_blank" rel="noopener">
                 <i class="fas fa-ticket-alt"></i>
                 <span>SHTOGUN · INGRESSOS WAVSESSIONS · 25 abr</span>
@@ -242,46 +233,36 @@
                 <i class="fas fa-chevron-right arrow"></i>
             </a>
         </div>
-        
-        <h2 style="
-            color: #ffcc00; 
-            text-align: center; 
-            font-size: 1.4rem; 
-            text-transform: uppercase; 
-            letter-spacing: 4px; 
-            margin-bottom: 2rem; 
-            font-weight: 800;
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 77, 0, 0.4);
-            filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
-        ">
-            WAVClub DJs
-        </h2>
-  
-        <div class="residents-section">
-            <a href="https://www.instagram.com/marvinwav/" class="resident-card" target="_blank" rel="noopener">
-                <img src="https://i.imgur.com/zRuT3M2.jpg" alt="Marvin" class="resident-img">
-                <span class="resident-name">@marvinwav</span>
-            </a>
+            
+            <h2 style="color: #ffcc00; text-align: center; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1.5rem; font-weight: 800; text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);">
+                WAVClub DJs
+            </h2>
+      
+            <div class="residents-section">
+                <a href="https://www.instagram.com/marvinwav/" class="resident-card" target="_blank">
+                    <img src="https://i.imgur.com/zRuT3M2.jpg" class="resident-img">
+                    <span class="resident-name">@marvinwav</span>
+                </a>
+                <a href="https://www.instagram.com/leozazaia/" class="resident-card" target="_blank">
+                    <img src="https://i.imgur.com/UqhAzMG.jpg" class="resident-img">
+                    <span class="resident-name">@leozazaia</span>
+                </a>
+                <a href="https://www.instagram.com/iavicious/" class="resident-card" target="_blank">
+                    <img src="https://i.imgur.com/OdKraEt.jpg" class="resident-img">
+                    <span class="resident-name">@iavicious</span>
+                </a>
+                <a href="https://www.instagram.com/kalygula_/" class="resident-card" target="_blank">
+                    <img src="https://i.imgur.com/WBrCB6Z.jpg" class="resident-img">
+                    <span class="resident-name">@kalygula_</span>
+                </a>
+            </div> 
 
-            <a href="https://www.instagram.com/leozazaia/" class="resident-card" target="_blank" rel="noopener">
-                <img src="https://i.imgur.com/UqhAzMG.jpg" alt="Leo Zazaia" class="resident-img">
-                <span class="resident-name">@leozazaia</span>
-            </a>
+            <div class="footer-note">
+                <i class="fas fa-wave-square"></i> WAV.CLUB · 2026
+            </div>
+        </main>
 
-            <a href="https://www.instagram.com/iavicious/" class="resident-card" target="_blank" rel="noopener">
-                <img src="https://i.imgur.com/OdKraEt.jpg" alt="Iavicious" class="resident-img">
-                <span class="resident-name">@iavicious</span>
-            </a>
-
-            <a href="https://www.instagram.com/kalygula_/" class="resident-card" target="_blank" rel="noopener">
-                <img src="https://i.imgur.com/WBrCB6Z.jpg" alt="Kalygula" class="resident-img">
-                <span class="resident-name">@kalygula_</span>
-            </a>
-        </div> 
-
-        <div class="footer-note">
-            <i class="fas fa-wave-square"></i>  WAV.CLUB · 2026  <i class="fas fa-wave-square"></i>
-        </div>
     </div>
+
 </body>
 </html>
